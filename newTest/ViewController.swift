@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var helloLabel: UILabel!
     @IBOutlet weak var topContraint: NSLayoutConstraint!
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -68,6 +70,8 @@ class ViewController: UIViewController {
         layer.borderWidth = 1
         layer.borderColor = UIColor(red: 0.937254902, green: 0.7098039216, blue: 0.6, alpha: 0.8).cgColor
         layer.backgroundColor = UIColor(red: 0.937254902, green: 0.7098039216, blue: 0.6, alpha: 0.8).cgColor
+        
+        self.view.backgroundColor = UIColor(red: 59/255, green: 92/255, blue: 124/255, alpha: 1)
         
         UIView.animate(withDuration: 4, animations: {
             self.topContraint.constant = 90

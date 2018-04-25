@@ -12,12 +12,41 @@ class ShowViewController: UIViewController {
 
     @IBOutlet weak var showCouter: UILabel!
     
+    var animator:UIDynamicAnimator? = nil;
+    let gravity = UIGravityBehavior()
+    var attachment: UIAttachmentBehavior!
+    
+    let collider = UICollisionBehavior()
+    
+    @IBOutlet weak var buttonLabel: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
     }
 
+    @IBAction func deplaceLabel(_ sender: Any) {
+        animator = UIDynamicAnimator(referenceView: self.view)
+//        attachment = UIAttachmentBehavior(item: buttonLabel, attachedTo: self.view)
+//        animator?.addBehavior(attachment)
+        
+        gravity.gravityDirection = CGVector(dx: 0, dy: 1.0)
+        animator?.addBehavior(gravity)
+        
+        gravity.addItem(showCouter)
+        
+        //adding the collision behavior
+        
+        collider.addItem(showCouter)
+        collider.addItem(buttonLabel)
+        
+        collider.translatesReferenceBoundsIntoBoundary = true
+        animator?.addBehavior(collider)
+    }
+
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -41,9 +70,7 @@ class ShowViewController: UIViewController {
             
             UIView.animate(withDuration: 2, animations: {
                 layer.backgroundColor = UIColor(red: 0.9, green: 0.2, blue: 0.2, alpha: 0.8).cgColor
-            }) { (f) in
-                print("finished")
-            }
+            })
         })
 
         // Do any additional setup after loading the view.
